@@ -1,3 +1,23 @@
+This is my modified version of the FakeNewsNet downlaoder. The dataset is originaly theirs, so all the credit belongs to them.
+I only changed the download code for tweets and retweets, as those took the longest amount of time.
+
+The tweet download was changed to use the `twarc` library and only uses a single key, while the logic behind the retweet 
+is still the same.
+
+The modifications include:
+ 
+ - The tweet and retweet data is no longer stored as `.json`, but as `.csv`
+ - Tweets are no longer in single files, but all each news item will receive just one tweet file. 
+ - Currently retweet files include both tweets and retweets. This could be changed, but for my workflow it's more convenient.
+ - The code checks, which files have already been downloaded, so it can be stopped and resumed at will
+ - the retweet download needs the tweet download to be finished first as it checks the availability of retweets based on
+ these tweet csv files.
+ 
+ 
+ 
+ If you want to modify the data, that is being saved from each downloaded, just modify the corresponding `extract_tweet_features`
+ or `extract_retweet_features` methods. Be carefull though, that they save the same information, as they go into the same file.
+
 
 
 ## FakeNewsNet

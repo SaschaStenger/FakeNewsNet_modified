@@ -82,6 +82,24 @@ def is_folder_exists(folder_name):
     return os.path.exists(folder_name)
 
 
+def equal_chunks(list, chunk_size):
+    """return successive n-sized chunks from l."""
+    chunks = []
+    for i in range(0, len(list), chunk_size):
+        chunks.append(list[i:i + chunk_size])
+
+    return chunks
+
+def already_downloaded_tweets(dump_location, news_source):
+    collected = []
+    location = "{}/{}/".format(dump_location, news_source)
+    for dirpath, dirnames, filenames in os.walk(location):
+        for filename in [f for f in filenames if f.endswith(".json")]:
+            collected.append(filename[:-5])
+
+    return collected
+
+
 def multiprocess_data_collection(function_reference, data_list, args, config: Config):
     # Create process pool of pre defined size
     pool = Pool(config.num_process)
