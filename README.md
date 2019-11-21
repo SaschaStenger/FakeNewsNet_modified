@@ -12,6 +12,7 @@ The modifications include:
  - The code checks, which files have already been downloaded, so it can be stopped and resumed at will
  - the retweet download needs the tweet download to be finished first as it checks the availability of retweets based on
  these tweet csv files.
+ - fake or none fake are now indicated by an extra column in the data file. It's a boolean value that's True(1) if it's a fake and False(0) if it's true
  
  
  
