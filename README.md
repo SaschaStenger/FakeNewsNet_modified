@@ -2,7 +2,7 @@ This is my modified version of the FakeNewsNet downlaoder. The dataset is origin
 I only changed the download code for tweets and retweets, as those took the longest amount of time.
 
 The tweet download was changed to use the `twarc` library and only uses a single key, while the logic behind the retweet 
-is still the same.
+is still the same. But this leads to much better downlaod times. In the end, when only loading the tweets, it should take around half a day.
 
 The modifications include:
  
