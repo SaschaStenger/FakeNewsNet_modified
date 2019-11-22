@@ -1,19 +1,12 @@
 from os import path
-from twarc import Twarc
 
+import pandas as pd
+from twarc import Twarc
+from util.util import DataCollector
 from util.util import create_dir, Config
 
-from util.util import DataCollector
-from util import Constants
-import pandas as pd
-
-with open("resources/tweet_keys_file.txt", 'r') as fKeysIn:
-    next(fKeysIn)
-    line_1 = fKeysIn[0].rstrip().split(',')
-
-
-t = Twarc(line_1[0], line_1[1], line_1[2], line_1[3])
-
+keys = pd.read_csv('resources/tweet_keys_file.txt').iloc[0]
+t = Twarc(keys['app_key'], keys['app_secret'], keys['oauth_token'], keys['oauth_token_secret'])
 
 
 features = ['tweet_id', 'retweeted_id', 'created_at', 'favorite_count', 'retweet_count',
@@ -22,18 +15,17 @@ features = ['tweet_id', 'retweeted_id', 'created_at', 'favorite_count', 'retweet
                          'text',
                          'fake']
 
-
 def collect_tweets(news_list, news_source, label, config: Config):
     create_dir(config.dump_location)
     create_dir("{}/{}".format(config.dump_location, news_source))
-    create_dir("{}/{}/{}".format(config.dump_location, news_source, label))
+    create_dir("{}/{}/tweets".format(config.dump_location, news_source))
 
 
     for news in news_list:
         print('Downloading ' + news_source + ' ' + label + ' ' + news.news_id + ' tweets')
         create_dir("{}/{}/{}/{}".format(config.dump_location, news_source, label, news.news_id))
         data = pd.DataFrame(columns= features)
-        news_dir = "{}/{}/{}/tweets/{}.csv".format(config.dump_location, news_source, label,
+        news_dir = "{}/{}/tweets/{}.csv".format(config.dump_location, news_source,
                                                              news.news_id)
         if path.exists(news_dir):
             continue
