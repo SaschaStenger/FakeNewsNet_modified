@@ -21,7 +21,7 @@ oauthlib==3.0.1
 Pillow==9.3.0
 python-dateutil==2.8.0
 PyYAML==5.1
-requests==2.21.0
+requests==2.31.0
 requests-file==1.4.3
 requests-oauthlib==1.2.0
 singledispatch==3.4.0.3
