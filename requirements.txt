@@ -32,4 +32,4 @@ tldextract==2.2.1
 tqdm==4.31.1
 twython==3.7.0
 urllib3==1.26.18
-Werkzeug==2.2.3
+Werkzeug==3.0.3
